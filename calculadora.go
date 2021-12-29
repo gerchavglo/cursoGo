@@ -16,6 +16,19 @@ func main(){
 
     resultado := sumar(operacion)
 
+if strings.Contains(operacion, "+"){
+   resultado = sumar(operacion)
+}else if strings.Contains(operacion, "-"){
+	resultado = sumar(operacion)
+}else if strings.Contains(operacion, "*"){
+	resultado = sumar(operacion)
+}else if strings.Contains(operacion, "/"){
+	resultado = sumar(operacion)
+}else{
+	fmt.Println("Error en detectar la operacion u operacion no implementada")
+}
+
+
 	fmt.Println(resultado)
 
 
@@ -35,3 +48,5 @@ func sumar(operacion string) int {
 
 	return resultado
 }
+
+
