@@ -9,14 +9,29 @@ import (
 )
 func main(){
 	scanner := bufio.NewScanner(os.Stdin)
+    fmt.Println("Calculadora Ver 0.1, implementa fx suma como func")
+
 	scanner.Scan()
 	operacion := scanner.Text()
 
-valores := strings.Split(operacion, "+")
+    resultado := sumar(operacion)
 
-operador1,_ := strconv.Atoi(valores[0])
-operador2,_ := strconv.Atoi(valores[1])
+	fmt.Println(resultado)
 
-	fmt.Println(operador1+operador2)
 
+
+}
+
+func sumar(operacion string) int {
+
+	valores := strings.Split(operacion, "+")
+	resultado := 0
+
+
+	for i := 0; i< len(valores); i++ {
+		num,_ := strconv.Atoi(valores [i])
+		resultado += num
+	}
+
+	return resultado
 }
