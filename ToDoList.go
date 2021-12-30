@@ -6,11 +6,35 @@ import (
 "strings"
 "strconv"
 "os"
+"encoding/json"
 )
 
 var keeprunning bool = false
+type TodoList struct{
+
+	ID           string `json:"id"`
+	Title        string `json:"title"`
+   Descripcion  string `json:"descripcion"`
+   TimeStamp    string `json:"timestamp"`
+   Status       string `json:"status"`
+
+
+
+}
+
+
 
 func main(){
+
+	var listaTodo []TodoList
+
+	listaTodo = append(listaTodo, TodoList{
+	ID:"1",
+	Title: "Tarea 1",
+	Descripcion:"task description",
+	TimeStamp:"2021-12-29T00:00:00",
+	Status:"false",
+	})
 
    for !keeprunning { 
 
@@ -33,7 +57,7 @@ func menu() {
 		if strings.Contains(operacion, "A"){
 		   resultado = sumar(operacion)
 		}else if strings.Contains(operacion, "L"){
-			resultado = sumar(operacion)
+			resultado = listar(operacion)
 		}else if strings.Contains(operacion, "D"){
 			resultado = sumar(operacion)
 		}else if strings.Contains(operacion, "N"){
@@ -45,6 +69,25 @@ func menu() {
 		}
 			fmt.Println(resultado)
 }
+
+
+
+
+func listar(operacion string) string {
+
+	var listaTodo []TodoList
+
+	listaTodo = append(listaTodo, TodoList{
+	ID:"1",
+	Title: "Tarea 1",
+	Descripcion:"task description",
+	TimeStamp:"2021-12-29T00:00:00",
+	Status:"false",
+	})
+   
+	return json.Marshal(listaTodo) 
+}
+
 
 func sumar(operacion string) int {
 
