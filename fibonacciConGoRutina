@@ -1,0 +1,55 @@
+package main
+
+import (
+  "fmt"
+  "strconv"
+    "os"
+)
+
+
+var a []int
+
+func fibonacci() func(int) int {
+	return func(x int) int {
+		if x >= 2 {
+			xf := a[x-1] + a[x-2]
+			a = append(a, xf)
+			return xf
+		}
+
+		a = append(a, x)
+		return (a[x])
+	}
+}
+
+func main() {
+  channel := make (chan string)
+  go func(channel chan string){
+  	for {
+  		var numUsuario string
+  		fmt.Scanln(&numUsuario)
+  		channel <- numUsuario
+  	}
+  }(channel)
+
+
+  for{
+       msgNumUsuario := <- channel
+       intVar, err := strconv.Atoi(msgNumUsuario)
+ 
+ 
+        if err != nil {
+        // handle error
+           fmt.Println(err)
+           os.Exit(2)
+        }
+
+
+       fmt.Println("Generando.. "+msgNumUsuario + " Iteraciones para Fibonacci")
+      // fmt.Println(intVar)
+		f := fibonacci()
+		for i := 0; i < intVar; i++ {
+			fmt.Println(f(i))
+		}
+    }	
+}
